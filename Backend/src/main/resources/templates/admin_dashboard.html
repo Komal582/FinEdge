@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>FinTrack | Admin Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+        }
+
+        .dashboard {
+            display: flex;
+            height: 100vh;
+        }
+
+
+        .sidebar {
+            width: 230px;
+            background-color: #1e3a8a;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 22px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background-color: #163172;
+        }
+
+        .logout {
+            background-color: #dc2626;
+        }
+
+        .logout:hover {
+            background-color: #b91c1c;
+        }
+
+
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .main h2 {
+            color: #1e3a8a;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .card .value {
+            font-size: 26px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+    </style>
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            if (event.persisted) {
+                // Page loaded from bfcache
+                window.location.reload();
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <div class="sidebar">
+        <h2>FinTrack</h2>
+
+
+        <a href="/admin/userlist"> View Users</a>
+        <a href="/admin/transcations">Transactions</a>
+        <a href="/admin/balance">Balance</a>
+        <a href="/admin/expense">Expense</a>
+        <a href="/admin/income">Income</a>
+
+        <a href="/logout" class="logout"> Logout</a>
+    </div>
+
+
+    <div class="main">
+        <h2>Admin Dashboard</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Total Users</h3>
+                <div class="value" th:text="${total_users}"></div>
+            </div>
+
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <div class="value" th:text="${total_transcations}"></div>
+            </div>
+
+            <div class="card">
+                <h3>Total Income</h3>
+                <div class="value" th:text="${total_income}"></div>
+            </div>
+
+            <div class="card">
+                <h3>Total Expense</h3>
+                <div class="value" th:text="${total_expense}"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

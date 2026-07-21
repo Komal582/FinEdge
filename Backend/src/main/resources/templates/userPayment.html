@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make Payment | FinTrack</title>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e6f2ff; /* FinTrack theme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .payment-card {
+            background-color: #ffffff;
+            width: 420px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        h1 {
+            color: #004085;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 15px;
+            color: #333;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 80%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin:2px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .dashboard-btn {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-card">
+    <h1>Make a Payment</h1>
+
+    <label for="amount">Amount (INR)</label>
+    <input type="number" id="amount" placeholder="Enter amount" required>
+
+    <button onclick="makePayment()">Pay Now</button>
+
+    <button class="dashboard-btn" onclick="goToDashboard()">Go to Dashboard</button>
+    <p class="note">
+        Secure payment powered by Razorpay
+    </p>
+</div>
+
+<script>
+    function makePayment() {
+        const amount = document.getElementById("amount").value;
+
+        if (!amount || amount <= 0) {
+            alert("Please enter a valid amount");
+            return;
+        }
+
+        fetch('/payment/create-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `amount=${amount}`
+        })
+        .then(response => response.json())
+        .then(order => {
+
+            const options = {
+                key: "rzp_test_Rt08aid73XdR7V",
+                amount: order.amount,
+                currency: order.currency,
+                name: "FinTrack",
+                description: "Secure Payment",
+                order_id: order.order_id,
+
+                handler: function (response) {
+
+                    fetch('/payment/payment-callback', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(response)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = "/paymentStatus/success";
+                        } else {
+                            window.location.href = "/paymentStatus/failure";
+                        }
+                    });
+                },
+
+                prefill: {
+                    name: "User",
+                    email: "user@example.com"
+                },
+
+                theme: {
+                    color: "#007bff"
+                }
+            };
+
+            const rzp1 = new Razorpay(options);
+            rzp1.open();
+        });
+
+
+    }
+
+    function goToDashboard(){
+             window.location.href="/user/dashboard";
+        }
+</script>
+
+</body>
+</html>

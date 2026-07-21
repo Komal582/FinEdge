@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login | FinTrack</title>
+
+    <style>
+        body {
+            background-color: #e6f2ff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .navbar {
+            background-color: #004080;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .navbar a {
+            background-color: white;
+            color: #004080;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #d9e6ff;
+        }
+
+
+        .container {
+            width: 350px;
+            background: white;
+            padding: 25px;
+            margin: 60px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #004080;
+            margin-bottom: 20px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #004080;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #003366;
+        }
+
+        .footer-text {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .footer-text a {
+            color: #004080;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="navbar">
+    <h1>Welcome to FinTrack</h1>
+    <a href="/user/signup">Sign Up</a>
+</div>
+
+
+<div class="container">
+    <h2>User Login</h2>
+
+    <form action="/do-login" method="post">
+        <input type="text" name="username" placeholder="Enter email" required>
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="footer-text">
+        Don’t have an account?
+        <a href="/user/signup">Create one</a>
+    </div>
+</div>
+
+</body>
+</html>

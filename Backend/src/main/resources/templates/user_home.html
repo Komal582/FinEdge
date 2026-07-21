@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome - FinTrack</title>
+  <style>
+    body {
+        background-color: #e6f2ff;
+        font-family: Arial, sans-serif;
+        padding: 40px;
+    }
+
+    .container {
+        width: 380px;
+        background: white;
+        padding: 30px;
+        margin: auto;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        color: #004080;
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 6px;
+        background-color: #004080;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #003366;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Welcome to FinTrack</h2>
+
+  <button onclick="window.location.href='/user/login'">Login</button>
+
+  <button onclick="window.location.href='/user/signup'">Signup</button>
+</div>
+
+</body>
+</html>

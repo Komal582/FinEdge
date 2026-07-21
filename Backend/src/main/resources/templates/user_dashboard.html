@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <style>
+    body {
+        background-color: #e6f2ff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .navbar {
+        background-color: #004080;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .navbar .title {
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .navbar a:hover {
+        text-decoration: underline;
+    }
+
+    /* Dashboard Buttons */
+    .container {
+        width: 400px;
+        background: white;
+        padding: 25px;
+        margin: 60px auto;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #004080;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #003366;
+    }
+
+    h2 {
+        color: #004080;
+    }
+  </style>
+  <script>
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            // Page loaded from bfcache
+            window.location.reload();
+        }
+    });
+
+
+  </script>
+
+
+</head>
+<body>
+
+
+<div class="navbar">
+  <div class="title">FinTrack</div>
+
+  <div class="links">
+    <a href="/user/update">Update Profile</a>
+    <a href="/logout">Logout</a>
+  </div>
+</div>
+
+
+<div class="container">
+  <h2>User Dashboard</h2>
+
+  <button onclick="location.href='/income/view'">➕ Add Income</button>
+  <button onclick="location.href='/expense/view'">➖ Add Expense</button>
+  <button onclick="location.href='/balance/updateBalance'">💰 View Balance</button>
+
+
+  <button onclick="location.href='/transcation/history'">📄 View Transactions</button>
+  <button onclick="location.href='/payment/view'">💳 Make Payment (Razorpay)</button>
+
+</div>
+
+</body>
+</html>

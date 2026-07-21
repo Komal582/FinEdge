@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed | FinTrack</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e6f2ff; /* FinTrack light blue */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .failure-card {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .failure-icon {
+            font-size: 60px;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #333;
+            font-size: 16px;
+            margin: 8px 0;
+        }
+
+        .info-box {
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #721c24;
+        }
+
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background-color: #b02a37;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="failure-card">
+    <div class="failure-icon">✖</div>
+    <h1>Payment Failed</h1>
+    <p>Your payment could not be completed.</p>
+    <p>Please try again.</p>
+
+    <div class="info-box">
+        If the amount was deducted, it will be refunded automatically within 5–7 working days.
+    </div>
+
+    <a href="/payment/view" class="btn">Retry Payment</a>
+</div>
+
+</body>
+</html>
