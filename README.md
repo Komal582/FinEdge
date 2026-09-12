@@ -1,52 +1,59 @@
-#FinTrack - Personal Finance Tracking system
-FinTrack is a Spring Boot-based personal finance tracking application that helps users record, categorize and analyze their income and expenses.
-The application focuses on financial traking and reporting rather than peer-to-peer money transfer.
+# FinEdge 
 
-#Features
--User authentication using Sprig Security
--Income and expense management
--Dashboard with financial summaries
--Online transcation catpure using razorpay(test mode)
--Secure session handling
--Clean MVC architecture
+FinEdge is a full-stack personal finance management application that helps users track their income, expenses, transactions, and financial activity.
 
-#Tech Stack
--Java 
--Spring Boot
--Spring Security 
--Spring Data JPA
--Thymeleaf
--MySql
--Razorpay API 
--Maven 
+## Features
 
-#Razorpay Integration
+-  JWT-based authentication
+-  Financial dashboard
+-  Income tracking
+-  Expense tracking
+-  Transaction history
+-  User settings
+-  Financial reports
+-  Razorpay payment integration
 
-Razorpay is integrated only to demonstrate secure online payment processing and callback handling.
-Payments are collected by the application's merchant account in test mode and are used to record verified transcation events.
-This project does not implement peer-to-peer money transfer or wallet functionality.
+## Tech Stack
 
-#Configuration & Setup
+Frontend
+- React
+- Vite
+- React Router
+- JavaScript
+- CSS
 
-Before running the project, configure the following:
-1.Create a MySql database named 'fintrack'
-2.Update your local 'application.properties' file with:
-  -Databse username and password
-  -Razorpay API key and secret(test keys)
+Backend
+- Java
+- Spring Boot
+- Spring Security
+- JWT
+- Spring Data JPA
+- Hibernate
 
-#How to Run the project
-1.Clone the Repository:
-git clone https://github.com/Komal582/Fintrack.git
-2.Open the project in IDE
-3.Configure application.properties 
-4.Run the Spring Boot application
-5.Open in browser:
-   http://localhost:8080
+Database
+- MySQL
 
-#Scope and Limitations
--This application is designed for financial tracking and analysis
--It is not a banking or money transfer system
--Razorpay runs in test mode only
--Real peer-to-peer transfer are outside the scope of this project
+#Getting Started
 
+#Backend
+cd backend
+mvnw spring-boot:run
 
+#Frontend
+cd frontend
+npm install
+npm run dev
+
+The frontend runs on http://localhost:5173 and the backend runs on http://localhost:8080.
+
+Future Improvements
+-Advanced financial reports
+-Interactive charts
+-Budget management
+-Financial goals
+-AI-powered financial insights
+
+Author
+Komal
+
+Java | Spring Boot | React
