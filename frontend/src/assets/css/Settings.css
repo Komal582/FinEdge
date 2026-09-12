@@ -1,0 +1,50 @@
+.setting-card{
+    max-width:600px;
+     background:white;
+     padding:25px;
+     border-radius:12px;
+     box-shadow:0 4px 15px rgba(0,0,0,0.10);
+     margin:0 auto; 
+}
+
+.profile{
+    display:flex;
+    flex-direction: row;
+    padding:10px;
+}
+
+.Photo{
+    border:1px solid black;
+    padding:14px;
+}
+.Photo svg{
+    font-size:50px;
+}
+.edit p{
+    margin-bottom: 0;
+}
+
+.setting-element{
+    border-top:1px solid #94a3b8;
+    width:100%;
+    padding:14px;
+    box-sizing: border-box;  
+    display:flex;
+    align-items:center;
+   
+}
+
+.setting-element a{
+    margin-left: auto;
+}
+
+.setting-element svg:first-child{
+    margin-right: 10px;
+}
+
+.setting-element:hover{
+    background-color: #eaf2f9;
+}
+
+
+

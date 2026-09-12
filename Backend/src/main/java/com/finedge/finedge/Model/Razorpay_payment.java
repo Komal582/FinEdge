@@ -1,10 +1,13 @@
 package com.finedge.finedge.Model;
 
-import jakarta.persistence.*;
-import jakarta.persistence.Id;
-
-import java.time.LocalDateTime;
 import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name="razorpay_payment")
@@ -19,7 +22,8 @@ public class Razorpay_payment {
     private String payment_status;
     private String method;
 
-    private Date created_at= new Date();
+    @Column(name = "created_at")
+    private Date createdAt = new Date();
 
     public User getUser() {
         return user;
@@ -83,11 +87,11 @@ public class Razorpay_payment {
     }
 
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

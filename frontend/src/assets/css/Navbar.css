@@ -1,0 +1,44 @@
+.navbar{
+
+    height:70px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    background:white;
+    border-bottom:6px solid #e5e5e5;
+  
+
+}
+
+.nav-right{
+    align-items:center;
+    gap:25px;
+    display:flex;
+}
+
+.notification-btn{
+    cursor:pointer;
+    background:none;
+    border:none;
+    font-size:22px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.logo h2{
+  
+   font-family: Inter, Arial, sans-serif;
+    font-size:30px;
+  font-weight:700;
+  color:#2563eb;
+}
+
+.profile svg{
+   font-size:28px;
+}

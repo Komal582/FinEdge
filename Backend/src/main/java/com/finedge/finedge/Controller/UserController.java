@@ -1,10 +1,10 @@
 package com.finedge.finedge.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,32 +12,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.finedge.finedge.DTO.DashboardResponse;
+import com.finedge.finedge.Model.Razorpay_payment;
 import com.finedge.finedge.Model.User;
+import com.finedge.finedge.Service.BalanceService;
+import com.finedge.finedge.Service.ExpenseService;
+import com.finedge.finedge.Service.IncomeService;
+import com.finedge.finedge.Service.TransactionService;
 import com.finedge.finedge.Service.UserService;
 
-import jakarta.servlet.http.HttpSession;
 
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
-         @Autowired
-         private UserService userService;
+    
+         private final UserService userService;
+         private final PasswordEncoder passwordEncoder;
+         private final ExpenseService expenseService;
+         private final IncomeService incomeService;
+         private final BalanceService balanceService;
+         private final TransactionService transactionService;
 
-         @Autowired
-         private PasswordEncoder passwordEncoder;
 
-
-
-         @GetMapping("/signup")
-         public String signupPage(){
-             return "userSignup";
+        public UserController(TransactionService transactionService, BalanceService balanceService,ExpenseService expenseService, IncomeService incomeService,UserService userService, PasswordEncoder passwordEncoder){
+            this.expenseService = expenseService;
+            this.incomeService = incomeService;
+            this.passwordEncoder=passwordEncoder;
+            this.userService =userService;
+            this.balanceService = balanceService;
+            this.transactionService = transactionService;
          }
 
          @PostMapping("/register")
-         public String registerUser(@RequestParam String name, @RequestParam String email, @RequestParam String password,HttpSession session){
+         public Boolean registerUser(@RequestParam String name, @RequestParam String email, @RequestParam String password){
              String hashedPassword = passwordEncoder.encode(password);
              String role="USER";
 
@@ -47,16 +58,17 @@ public class UserController {
              user.setEmail(email);
              user.setPassword(hashedPassword);
 
-             userService.saveUser(user);
-
-            System.out.println("IN Register page");
-             return "redirect:/user/userSuccess";
-
+             if(userService.saveUser(user)){
+                return true;
+             }
+             else{
+                return false;
+             }
          }
 
         @ResponseBody
         @PutMapping("/updateUser")
-        public String updateUser(Model model,@RequestBody User user,Authentication authentication){
+        public String updateUser(@RequestBody User user,Authentication authentication){
             
             User session_user = (User)authentication.getPrincipal();
             
@@ -98,12 +110,35 @@ public class UserController {
 
              return "userUpdate";
          }
+   
 
 
+         @PostMapping("/dashboard")
+         public DashboardResponse dashboard( Authentication authentication ){
 
-         @GetMapping("/dashboard")
-         public String userDashboard(){
-               return "user_dashboard";
+
+           
+            User user =(User)authentication.getPrincipal();
+            Integer balanceAmount = balanceService.getBalanceById(user);
+            System.out.println("Balance"+balanceAmount); 
+           
+            Integer income = incomeService.getIncomeAmountByUser(user);
+           
+            Integer expense = expenseService.getExpenseAmountByUser(user);
+
+            List<Razorpay_payment> userLatestTranscationList =transactionService.getLatestUserTranscation(user.getUser_id());
+            
+            
+               return new DashboardResponse(
+                  user.getUsername(),
+                  balanceAmount,
+                  income,
+                  expense,
+                  userLatestTranscationList
+               );
+
+           
+                    
          }
 
 

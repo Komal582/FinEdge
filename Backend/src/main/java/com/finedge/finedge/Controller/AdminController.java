@@ -238,7 +238,7 @@ public class AdminController {
             html.append("<td>").append(trans.getAmount()).append("</td>");
             html.append("<td>").append(trans.getCurrency()).append("</td>");
             html.append("<td>").append(trans.getMethod()).append("</td>");
-            html.append("<td>").append(trans.getCreated_at()).append("</td>");
+            html.append("<td>").append(trans.getCreatedAt()).append("</td>");
 
 
 

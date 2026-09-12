@@ -8,7 +8,7 @@ public interface BalanceService {
 
 
 
-    Balance getBalanceById(User user);
+   Integer getBalanceById(User user);
 
 
     Boolean saveBalance(Balance balance);

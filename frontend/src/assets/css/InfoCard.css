@@ -1,0 +1,27 @@
+.info-card{
+    flex:1;
+    background: white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.06);
+    min-width:200px;
+    transition:0.2s;
+}
+
+.info-card h3{
+     color: #6b7280;
+     margin-bottom:0 0 10px;
+     font-size:14px;
+     font-weight:500;
+}
+
+.info-card h2{
+    color: #111827;
+    font-size:26px;
+    font-weight:700;
+    margin:0;
+}
+
+.info-card:hover{
+    transform:translateY(-3px)
+}

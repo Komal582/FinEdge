@@ -1,16 +1,19 @@
 package com.finedge.finedge.Security;
+import java.util.Date;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Claims;
-import java.util.Date;
-import javax.crypto.SecretKey;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+
 @Service
 public class JWTService {
 
-   
+    
     
     private static final SecretKey key = Keys.hmacShaKeyFor("njhefjkasdkjqjwkjowjekjoroweoqjowjd".getBytes());
    

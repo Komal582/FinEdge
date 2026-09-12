@@ -5,7 +5,7 @@ import com.finedge.finedge.Model.User;
 
 public interface UserService {
 
-    User saveUser(User user);
+    boolean saveUser(User user);
 
     boolean updateUser(User user);
 

@@ -1,18 +1,22 @@
 package com.finedge.finedge.Controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.finedge.finedge.Model.Expense;
 import com.finedge.finedge.Model.User;
 import com.finedge.finedge.Repository.UserRepository;
 import com.finedge.finedge.Service.ExpenseService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+@RestController
 @RequestMapping("/expense")
 public class ExpenseController {
 
@@ -22,29 +26,30 @@ public class ExpenseController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/view")
-    public String viewExpense(HttpSession session){
-
-
-
-        return "userExpense";
-    }
-
     @PostMapping("/addExpense")
-    public String addExpense(RedirectAttributes redirectAttributes, @ModelAttribute Expense expense, Authentication authentication){
+    public Boolean addExpense(@ModelAttribute Expense expense, Authentication authentication){
 
         User user =(User)authentication.getPrincipal();
-
-
+        
         expense.setUser(user);
 
-        if(expenseService.addExpense(expense)){
-            redirectAttributes.addFlashAttribute("message","Expense added successfully");
+       boolean flag=expenseService.addExpense(expense);
+
+        if(flag) {
+              
+             return true;
         }
         else{
-             redirectAttributes.addFlashAttribute("message","Expense not saved Successfully");
+           return false;
         }
+    }
 
-        return "redirect:/expense/view";
+    @GetMapping("/history")
+    public List<Expense> getExpenseHistory(Authentication authentication){
+        User user = (User)authentication.getPrincipal();
+        List<Expense> expense = expenseService.getExpenseHistory(user);
+      
+        return expense;  
+
     }
 }

@@ -1,0 +1,16 @@
+.captured {
+    color: green;
+    font-weight: bold;
+}
+
+.failed {
+    color: red;
+    font-weight: bold;
+}
+
+.success {
+    color:green;
+}
+.failure{
+    color:red;
+}

@@ -1,14 +1,15 @@
 package com.finedge.finedge.Service.Impl;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.finedge.finedge.Model.Income;
 import com.finedge.finedge.Model.User;
 import com.finedge.finedge.Repository.IncomeRepository;
 import com.finedge.finedge.Service.IncomeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
@@ -22,8 +23,7 @@ public class IncomeServiceImpl implements IncomeService {
 
 
         incomeRepository.save(income);
-        System.out.println(income.getIncome_id());
-        System.out.println(income.getAmount());
+       
 
         return true;
     }
@@ -31,9 +31,20 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public Integer getIncomeAmountByUser(User user){
 
-        Optional<Integer> income = incomeRepository.getIncomeAmountByUser(user);
-        System.out.println("Repository Response: " + income);
+        Integer income = incomeRepository.getIncomeAmountByUser(user);
+        
+        if(income!=null){
+            return income;
+        }
+        else{
+            return 0;
+        }
 
-        return income.orElseThrow(() -> new RuntimeException("Income not found"));
+        
+    }
+
+    @Override
+    public List<Income> getIncomeHistory(User user){
+        return incomeRepository.getByUser(user);
     }
 }

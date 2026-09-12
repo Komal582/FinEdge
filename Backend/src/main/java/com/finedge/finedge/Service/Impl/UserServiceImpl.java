@@ -13,12 +13,14 @@ public class UserServiceImpl implements UserService {
      @Autowired
      private UserRepository userRepository;
 
-
+     
 
     @Override
-    public User saveUser(User user) {
+    public boolean saveUser(User user) {
 
-        return userRepository.save(user);
+       userRepository.save(user);
+       
+       return true;
 
     }
 

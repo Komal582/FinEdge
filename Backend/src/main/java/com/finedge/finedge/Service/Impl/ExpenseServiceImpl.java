@@ -1,23 +1,29 @@
 package com.finedge.finedge.Service.Impl;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.finedge.finedge.Model.Expense;
 import com.finedge.finedge.Model.User;
 import com.finedge.finedge.Repository.ExpenseRepository;
 import com.finedge.finedge.Service.ExpenseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+ 
+    @Override
+    public List<Expense> getExpenseHistory(User user){
+       return expenseRepository.getByUser(user);
+    }
 
     @Override
-    public Boolean addExpense(Expense expense){
+    public boolean addExpense(Expense expense){
          expenseRepository.save(expense);
          System.out.println(expense.getExpense_id());
         System.out.println(expense.getAmount());
@@ -30,10 +36,15 @@ public class ExpenseServiceImpl implements ExpenseService {
     public Integer getExpenseAmountByUser(User user){
 
 
+        Integer expense=expenseRepository.getExpenseAmountByUser(user);
+        System.out.println("Expense"+ expense);
 
-        Optional<Integer> expense=expenseRepository.getExpenseAmountByUser(user);
-
-        return expense.orElseThrow(()-> new RuntimeException("Expense not found"));
+       if(expense==null){
+         return 0;
+       }
+       else{
+        return expense;
+       }
 
 
     }
