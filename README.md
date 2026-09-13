@@ -28,7 +28,7 @@ Backend
 - Spring Security
 - JWT
 - Spring Data JPA
-- Hibernate
+
 
 Database
 - MySQL
