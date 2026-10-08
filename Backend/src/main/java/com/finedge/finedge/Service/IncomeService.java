@@ -12,4 +12,6 @@ public interface IncomeService {
     Integer getIncomeAmountByUser(User user);
 
     public List<Income> getIncomeHistory(User user);
+
+    
 }

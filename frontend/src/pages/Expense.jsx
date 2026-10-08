@@ -1,19 +1,22 @@
 import React from "react";
-import Navbar from "../components/layout/Navbar";
-import Sidebar from "../components/layout/Sidebar";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {ExpenseCategoryContext} from "../context/ExpenseCategoryContext";
+import { useContext } from "react";
 
 function Expense() {
   const token = "Bearer " + localStorage.getItem("token");
   const [error, setError] = useState("");
-
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
   const [note, setNote] = useState("");
   const [status, setStatus] = useState(null);
 
+  const options = useContext(ExpenseCategoryContext);
+ 
   async function saveExpense(event) {
     event.preventDefault();
     const formdata = new URLSearchParams();
@@ -72,15 +75,11 @@ function Expense() {
                 <div>
                   <label htmlFor="category">Category</label>
                   <select id="category" name="category" value={category} onChange={(event)=>{setCategory(event.target.value)}} required>
-                    <option value="">-- Select Category --</option>
-                    <option value="Food">Food</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Rent">Rent</option>
-                    <option value="Bills">Bills</option>
-                    <option value="Medicines">Medicines</option>
-                    <option value="Education">Education</option>
-                    <option value="Other">Other</option>
+                     <option value="">-- Select Category --</option>
+                  {options.map((option)=>(
+                        <option key={option} value={option}>{option}</option>
+                  ))}
+                   
                   </select>
                 </div>
 

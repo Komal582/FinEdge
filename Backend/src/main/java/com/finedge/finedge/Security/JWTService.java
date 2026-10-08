@@ -13,11 +13,8 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTService {
 
-    
-    
     private static final SecretKey key = Keys.hmacShaKeyFor("njhefjkasdkjqjwkjowjekjoroweoqjowjd".getBytes());
    
-
     public String generateToken(UserDetails userDetails){
        return Jwts.builder()
             .subject(userDetails.getUsername())

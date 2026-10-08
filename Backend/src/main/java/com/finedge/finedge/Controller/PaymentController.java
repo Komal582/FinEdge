@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.razorpay.Utils;
 
-@Controller
+@RestController
 @RequestMapping("/payment")
 public class PaymentController {
 

@@ -1,6 +1,7 @@
 package com.finedge.finedge.Model;
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +24,7 @@ public class Razorpay_payment {
     private String method;
 
     @Column(name = "created_at")
-    private Date createdAt = new Date();
+    private LocalDate createdAt;
 
     public User getUser() {
         return user;
@@ -87,11 +88,11 @@ public class Razorpay_payment {
     }
 
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 }

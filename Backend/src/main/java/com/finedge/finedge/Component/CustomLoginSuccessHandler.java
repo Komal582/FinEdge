@@ -34,15 +34,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         System.out.println("Login Success Handler");
         UserDetails userDetails = (UserDetails)authentication.getPrincipal(); 
 
+        System.out.println("User Details"+userDetails);
         String token =jwtService.generateToken(userDetails);
 
         response.setContentType("application/json");
 
-        LoginResponse loginResponse = new LoginResponse(token);
+        LoginResponse loginResponse = new LoginResponse(token,userDetails);
 
         String json = objectMapper.writeValueAsString(loginResponse);
-
-        response.setContentType("application/json");
 
         response.getWriter().write(json);
 

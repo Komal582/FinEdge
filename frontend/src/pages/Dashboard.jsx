@@ -1,61 +1,61 @@
 import React, { useEffect } from "react";
-import Sidebar from "../components/layout/Sidebar.jsx";
-import Navbar from "../components/layout/Navbar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import Navbar from "../components/Navbar.jsx";
 import "../assets/css/Dashboard.css";
-import "../components/common/InfoCard.jsx";
-import InfoCard from "../components/common/InfoCard.jsx";
+import "../components/InfoCard.jsx";
+import InfoCard from "../components/InfoCard.jsx";
 import "../assets/css/table.css";
 import "../assets/css/Dashboard_basics.css";
+import { use } from "react";
+import { UserDataContext } from "../context/UserDataContext.jsx";
+import { useContext } from "react";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
+  const { userData, setUserData } = useContext(UserDataContext);
   const [loading, setLoading] = useState(true);
-  const [balance, setBalance] = useState(0);
-  const [expense, setExpense] = useState(0);
-  const [income, setIncome] = useState(0);
+  const [expense, setExpenses] = useState(0);
+  const [income, setIncomes] = useState(0);
   const [error, setError] = useState("");
-  const[name,setName]=useState("");
-  const [transactionlist, setTransactionlist] = useState([{}]);
-  const[currency,setCurrency]=useState("");
+  const [balance, setBalance] = useState(0);
 
+  const [transactionsList, setTransactionsList] = useState(0);
   let token = "Bearer " + localStorage.getItem("token");
+
   useEffect(() => {
     async function fetchDashboard() {
       try {
         const response = await fetch("http://localhost:8080/user/dashboard", {
           method: "POST",
           headers: {
-             "Authorization":token,
+            Authorization: token,
           },
         });
         const data = await response.json();
-        console.log("Data",data);
+        console.log("Data in Context ", data);
         if (!response.ok) {
           throw new Error("Request Failed");
         }
-       
-        setExpense(data.expense); 
-        setIncome(data.income);
+
+        setUserData(data);
+        setExpenses(data.expense);
+        setIncomes(data.incomes);
+        setTransactionsList(data.transcationList);
         setBalance(data.balance);
-        setTransactionlist(data.transcationList);
-        setCurrency(data.transcationList[0].currency);
-        setName(data.userName);
-       
       } catch (error) {
         setError("Something went wrong");
       } finally {
         setLoading(false);
       }
     }
-
     fetchDashboard();
   }, []);
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="dashboard-container">
         <Sidebar />
         <main className="dashboard-content">
@@ -67,17 +67,40 @@ function Dashboard() {
             ) : (
               <>
                 <div className="cards">
-                  <InfoCard title="Total Balance" amount={balance} currency={currency} />
-                  <InfoCard title="Total Income" amount={income} currency={currency}/>
-                  <InfoCard title="Total Expense" amount={expense} currency={currency}/>
+                  <InfoCard
+                    title="Total Balance"
+                    amount={userData.balance}
+                    currency={
+                      userData.transcationList.length != 0
+                        ? userData.transcationList[0].currency
+                        : "INR"
+                    }
+                  />
+                  <InfoCard
+                    title="Total Income"
+                    amount={userData.income}
+                    currency={
+                      userData.transcationList.length != 0
+                        ? userData.transcationList[0].currency
+                        : "INR"
+                    }
+                  />
+                  <InfoCard
+                    title="Total Expense"
+                    amount={userData.expense}
+                    currency={
+                      userData.transcationList.length != 0
+                        ? userData.transcationList[0].currency
+                        : "INR"
+                    }
+                  />
                 </div>
 
                 <div className="table_style">
                   <h4>Recent Transactions</h4>
-                  {transactionlist.length > 0 ? (
+                  {userData.transcationList.length > 0 ? (
                     <div>
-                       
-                         <table>
+                      <table>
                         <thead>
                           <tr>
                             <th>Currency</th>
@@ -87,9 +110,8 @@ function Dashboard() {
                           </tr>
                         </thead>
                         <tbody>
-                          {transactionlist.map((transaction) => (
+                          {userData.transcationList.map((transaction) => (
                             <tr key={transaction.payment_id}>
-                              
                               <td>{transaction.currency}</td>
                               <td>{transaction.amount}</td>
                               <td>{transaction.method}</td>
@@ -104,9 +126,7 @@ function Dashboard() {
                         </tbody>
                       </table>
 
-                      
-                      
-                        <Link to="/transactions">more transactions...</Link>
+                      <Link to="/transactions">more transactions...</Link>
                     </div>
                   ) : (
                     <p>No transcations yet</p>

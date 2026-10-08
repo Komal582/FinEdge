@@ -1,6 +1,9 @@
 package com.finedge.finedge.Service.Impl;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,19 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     }
 
+
+   @Override 
+   public HashMap<String,Long> getExpenseAmountByCategory(User user, Integer year, List<String> category){
+      HashMap<String,Long> map = new HashMap<>();
+      LocalDate startDate = LocalDate.of(year,1,1);
+      LocalDate endDate = LocalDate.of(year,12,12);
+      for(int i=0;i<category.size();i++){
+         Long amount=expenseRepository.getTotalExpenseByCategory(user,category.get(i),startDate,endDate).orElse(0L);
+         System.out.println("Category"+category.get(i));
+         map.put(category.get(i),amount);
+      }
+      return map;
+   }
 
 
 }

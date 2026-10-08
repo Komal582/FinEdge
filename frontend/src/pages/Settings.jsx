@@ -1,17 +1,17 @@
 import React from 'react';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 import { FaGlobe, FaPalette , FaUser,FaLock,FaBell,FaSignOutAlt, FaAngleRight} from 'react-icons/fa';
 import "../assets/css/Settings.css";
 import "../assets/css/Dashboard_basics.css";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useContext } from 'react';
+import UserDataContext from '../context/UserDataContext';
 
 function Settings() {
-  const[name,setName]=useState("komal");
-  const[email,setEmail]=useState("komal123@gmail.com");
-
+ 
+  const {userData} = useContext(UserDataContext);
  
   return (
     <>
@@ -25,39 +25,39 @@ function Settings() {
                    <FaUser/>
               </div>
               <div className="edit">
-                  <p>{name}</p>
-                  <p>{email}</p>
+                  <p>{userData.username}</p>
+                  <p>{userData.email}</p>
                   <Link to="/edit">Edit Profile</Link>
               </div>
             </div>
             <div className='setting-element' >
            
-               <FaUser></FaUser> 
-             Personal Information<Link to="/changePassword"><FaAngleRight/></Link>
+               <Link className='setting-link' to="/changePassword"><FaUser></FaUser> 
+             Personal Information<FaAngleRight/></Link>
           
             </div>
             <div className='setting-element'>
-               <FaLock></FaLock>Change Password<Link to="/changePassword"><FaAngleRight/></Link>
+               <Link className='setting-link' to="/changePassword"><FaLock></FaLock><span>Change Password</span><FaAngleRight/></Link>
             </div>
             <div className='setting-element'>
             
-               <FaBell></FaBell>Notifications<Link to="/changePassword"><FaAngleRight/></Link>
+               <Link className='setting-link' to="/changePassword"><FaBell></FaBell>Notifications<FaAngleRight/></Link>
             </div>
             <div className='setting-element'>
               
-             <FaLock></FaLock>Privacy & Security<Link to="/changePassword"><FaAngleRight/></Link>
+             <Link className='setting-link' to="/changePassword"><FaLock></FaLock>Privacy & Security<FaAngleRight/></Link>
             </div>
             <div className='setting-element'>
               
-             <FaPalette ></FaPalette>Theme<Link to="/changePassword"><FaAngleRight/></Link>
+             <Link className='setting-link' to="/changePassword"><FaPalette ></FaPalette>Theme<FaAngleRight/></Link>
             </div>
             <div className='setting-element'>
                
-             <FaGlobe></FaGlobe>Language<Link to="/changePassword"><FaAngleRight/></Link>
+             <Link className='setting-link' to="/changePassword"><FaGlobe></FaGlobe>Language<FaAngleRight/> </Link>
             </div>
             <div className='setting-element'>
             
-              <FaSignOutAlt/>Logout<Link to="/changePassword"><FaAngleRight/></Link>
+              <Link className='setting-link' to="/changePassword"><FaSignOutAlt/>Logout<FaAngleRight/></Link>
             </div>
           </div>
           

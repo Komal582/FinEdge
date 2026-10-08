@@ -90,7 +90,7 @@
 
 
 
-.input-wrapper svg{
+.login-input-wrapper svg{
    color:#94a3b8;
    position:absolute;
    left: 14px;
@@ -99,23 +99,24 @@
    
 }
 
-.input-wrapper{
-  width:100%;
-  position:relative;
+
+.login-input-wrapper {
+    position: relative;
+    width: 100%;
 }
 
-.input-wrapper input{
+.login-input-wrapper input{
    border: 2px solid #d1d5db;  
     border-radius:8px;
     font-size:14px;
     margin:0;
-   width: 100%;
+    width: 100%;
     box-sizing: border-box;
     padding: 11px 14px 11px 40px;
     transition:0.3s;
 }
 
-.input-wrapper input:focus {
+.login-input-wrapper input:focus {
     outline: none;
     border-color: #2563eb;
     box-shadow: 0 0 0 4px rgba(37,99,235,0.1);

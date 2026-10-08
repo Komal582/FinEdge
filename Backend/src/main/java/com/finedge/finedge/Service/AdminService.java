@@ -1,9 +1,12 @@
 package com.finedge.finedge.Service;
 
-import com.finedge.finedge.Model.*;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import com.finedge.finedge.Model.Balance;
+import com.finedge.finedge.Model.Expense;
+import com.finedge.finedge.Model.Income;
+import com.finedge.finedge.Model.Razorpay_payment;
+import com.finedge.finedge.Model.User;
 
 
 public interface AdminService {
@@ -12,7 +15,7 @@ public interface AdminService {
 
 
 
-    List<Razorpay_payment> getAllTranscation();
+    List<Razorpay_payment> getAllTransaction();
 
     List<Balance> getAllBalance();
 
@@ -22,9 +25,14 @@ public interface AdminService {
 
     long getTotalUser();
 
-    long getTotalTranscations();
+    long getTotalTransactions();
 
     long getTotalIncome();
 
     long getTotalExpense();
+
+    List<User> getLatestUser();
+
+    List<Razorpay_payment> getLatestTransaction();
+
 }

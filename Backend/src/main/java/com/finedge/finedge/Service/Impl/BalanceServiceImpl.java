@@ -1,8 +1,5 @@
 package com.finedge.finedge.Service.Impl;
 
-import java.time.LocalDateTime;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finedge.finedge.Model.Balance;
@@ -50,24 +47,6 @@ public class BalanceServiceImpl implements BalanceService {
                transcation_amount = 0;
           }
           Integer total_balance = income_amount - (expense_amount + transcation_amount);
-          Balance balance = new Balance();
-
-          // Boolean flag = findUser(user);
-
-          // if (flag == false) {
-
-          //      balance.setUser(user);
-          //      balance.setCurrent_balance(total_balance);
-          //      balance.setLast_updated(LocalDateTime.now());
-
-          //      saveBalance(balance);
-
-          // } else {
-          //      balance = getBalanceByUser(user);
-          //      balance.setCurrent_balance(total_balance);
-          //      updateBalance(balance);
-
-          // }
 
           return total_balance;
 

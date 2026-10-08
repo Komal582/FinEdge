@@ -2,7 +2,6 @@ package com.finedge.finedge.Service.Impl;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -43,9 +42,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Integer getTranscationAmountByUser(User user){
 
-        Optional<Integer> amount = razorpayPaymentRepository.getRazorpayPaymentAmountByUser(user);
+       Integer amount = razorpayPaymentRepository.getRazorpayPaymentAmountByUser(user).orElse(0);
 
-        return amount.orElseThrow(()->new RuntimeException("Transcation amount not found"));
+        return amount;
     }
 
     private Pageable PageRequest(int i, int i0) {

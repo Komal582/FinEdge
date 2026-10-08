@@ -5,7 +5,15 @@ import java.util.List;
 import com.finedge.finedge.Model.Razorpay_payment;
 
 public class DashboardResponse {
-    private String userName;
+    private String username;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+  
+
     private double expense;
     private double income;
     private double balance;
@@ -19,31 +27,32 @@ public class DashboardResponse {
         this.transcationList = transcationList;
     }
 
-     public String getUserName() {
-        return userName;
+     public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
 
      public DashboardResponse() {
     }
 
-     public DashboardResponse(String userName,
+     public DashboardResponse(String username,
                              double balance,
                              double income,
                              double expense,
+                             String email,
                             List<Razorpay_payment> transcationList
                         
                             ) {
-        this.userName = userName;
+        this.username = username;
         this.balance = balance;
         this.income = income;
         this.expense = expense;
         this.transcationList=transcationList;
-       
+        this.email=email;
     }
 
 

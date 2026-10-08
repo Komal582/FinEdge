@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import Navbar from '../components/layout/Navbar';
-import Sidebar from '../components/layout/Sidebar';
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import "../assets/css/Income.css";
 import { Link } from 'react-router-dom';

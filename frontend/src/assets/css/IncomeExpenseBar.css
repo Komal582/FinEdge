@@ -1,0 +1,13 @@
+.incomexpense-container h3{
+    font-size:16px;
+    color: #1f2937;
+}
+
+#income{
+    background-color:green;
+}
+
+#expense{
+    color:red;
+}
+

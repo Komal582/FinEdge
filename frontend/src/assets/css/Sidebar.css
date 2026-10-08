@@ -5,7 +5,10 @@
     border-right:2px solid black;
     padding:20px;
     transition:0.3s;
-
+    position:sticky;
+    box-sizing: border-box;
+    top:0;
+    z-index: 999;
 }
 
 .sidebar.closed{
@@ -28,7 +31,8 @@
 }
 
 .sidebar li:hover{
-    background-color:#f3f4f6;
+    background:#2563eb;
+    color:white;
 }
 
 .sidebar button{
@@ -40,11 +44,6 @@
 
 }
 
-.sidebar li.active{
-    background:#2563eb;
-    color:white;
-}
-
 .link{
     text-decoration: none;
     display:block;
@@ -52,5 +51,8 @@
     color:black;
 }
 
+.link:hover{
+    color:white;
+}
 
 

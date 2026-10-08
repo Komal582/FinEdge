@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import Sidebar from "../components/layout/Sidebar.jsx";
-import Navbar from "../components/layout/Navbar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import Navbar from "../components/Navbar.jsx";
 import "../assets/css/Dashboard.css";
 import "../assets/css/table.css";
 import "../assets/css/Dashboard_basics.css";

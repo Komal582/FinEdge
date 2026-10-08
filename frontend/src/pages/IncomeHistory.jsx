@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import Navbar from "../components/layout/Navbar";
-import Sidebar from "../components/layout/Sidebar";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import "../assets/css/IncomeHistory.css";
 import "../assets/css/table.css";
 import "../assets/css/table.css";

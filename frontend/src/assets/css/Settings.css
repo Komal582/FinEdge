@@ -22,6 +22,21 @@
 }
 .edit p{
     margin-bottom: 0;
+    
+}
+
+.edit a{
+   text-decoration: none;
+   font-weight: 600;
+}
+
+.edit{
+    color:#4b5563;
+}
+
+.edit>*:first-child{
+    color:black;
+    text-transform: capitalize;
 }
 
 .setting-element{
@@ -29,17 +44,27 @@
     width:100%;
     padding:14px;
     box-sizing: border-box;  
-    display:flex;
-    align-items:center;
+
    
 }
 
-.setting-element a{
-    margin-left: auto;
+.setting-link{
+    color:#374151;
+    text-decoration: none;
+    display:flex;
+    align-items: center;
+    width: 100%;    
+    
 }
 
-.setting-element svg:first-child{
+
+
+.setting-link svg:first-child{
     margin-right: 10px;
+}
+
+.setting-link svg:last-child{
+    margin-left: auto;
 }
 
 .setting-element:hover{

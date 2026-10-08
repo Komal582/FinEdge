@@ -1,6 +1,5 @@
 package com.finedge.finedge.Security;
 
-
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -27,6 +26,7 @@ public class SecurityConfig {
 
      private final JWTAuthenticationFilter jwtAuthentication;
      private final CustomLoginSuccessHandler customLoginSuccessHandler;
+     private final CustomUserDetailsServiceImpl customUserDetailsServiceImpl ;
 
      public SecurityConfig(JWTAuthenticationFilter jwtAuthentication, CustomLoginSuccessHandler customLoginSuccessHandler, CustomUserDetailsServiceImpl customUserDetailsServiceImpl){
         this.jwtAuthentication =jwtAuthentication;
@@ -35,9 +35,6 @@ public class SecurityConfig {
 
      }
 
-     private final CustomUserDetailsServiceImpl customUserDetailsServiceImpl ;
-
-    
 
       @Bean
        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -61,7 +58,6 @@ public class SecurityConfig {
 
                                      .anyRequest().permitAll())
                      .formLogin(form->form
-                             .loginPage("/login")
                              .loginProcessingUrl("/do-login")
                              .successHandler(customLoginSuccessHandler)
                              .failureUrl("/login?error=true")
@@ -83,7 +79,7 @@ public class SecurityConfig {
 
      @Bean
      public CorsConfigurationSource corsConfigurationSource(){
-        System.out.println("CORS Bean Loaded");
+     
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
 
@@ -98,16 +94,13 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", corsConfiguration);
 
         return source;
-
-
      }
 
       @Bean
       public PasswordEncoder passwordEncoder(){
-
-
           return new BCryptPasswordEncoder();
       }
+
 
       @Bean
       public AuthenticationManager authenticationManager( CustomUserDetailsServiceImpl customUserDetailsServiceImpl,PasswordEncoder passwordEncoder){
@@ -116,7 +109,7 @@ public class SecurityConfig {
              doaAuthenticationProvider.setUserDetailsService(customUserDetailsServiceImpl);
              System.out.println("in Auth");
              doaAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-
+            System.out.println("Status of login"+new ProviderManager(doaAuthenticationProvider)); 
              return new ProviderManager(doaAuthenticationProvider);
 
 

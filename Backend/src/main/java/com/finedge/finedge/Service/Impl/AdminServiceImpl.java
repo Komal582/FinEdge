@@ -1,15 +1,26 @@
 package com.finedge.finedge.Service.Impl;
 
 
-import com.finedge.finedge.Model.*;
-import com.finedge.finedge.Repository.*;
-import com.finedge.finedge.Service.AdminService;
-import com.finedge.finedge.Service.BalanceService;
-import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.finedge.finedge.Model.Balance;
+import com.finedge.finedge.Model.Expense;
+import com.finedge.finedge.Model.Income;
+import com.finedge.finedge.Model.Razorpay_payment;
+import com.finedge.finedge.Model.User;
+import com.finedge.finedge.Repository.AdminRepository;
+import com.finedge.finedge.Repository.BalanceRepository;
+import com.finedge.finedge.Repository.ExpenseRepository;
+import com.finedge.finedge.Repository.IncomeRepository;
+import com.finedge.finedge.Repository.Razorpay_paymentRepository;
+import com.finedge.finedge.Repository.UserRepository;
+import com.finedge.finedge.Service.AdminService;
 
 @Service()
 public class AdminServiceImpl implements AdminService {
@@ -50,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public List<Razorpay_payment> getAllTranscation(){
+    public List<Razorpay_payment> getAllTransaction(){
 
         List<Razorpay_payment> transcation =razorpayPaymentRepository.findAll();
 
@@ -106,7 +117,7 @@ public class AdminServiceImpl implements AdminService {
         return userRepository.count();
     }
     @Override
-    public long getTotalTranscations(){
+    public long getTotalTransactions(){
         return razorpayPaymentRepository.count();
     }
     @Override
@@ -116,6 +127,38 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public long getTotalExpense(){
         return expenseRepository.count();
+    }
+
+    @Override 
+    public List<User> getLatestUser(){
+
+       
+        Pageable pageable = PageRequest.of(0,5);
+        Page<User> userPage = userRepository.findAll(pageable);
+        List<User> topFiveUsers =userPage.getContent();
+
+        if(topFiveUsers.isEmpty()){
+            throw new RuntimeException("Users not found");
+        }
+        else{
+            return topFiveUsers;
+        }
+    }
+
+    @Override
+    public List<Razorpay_payment> getLatestTransaction(){
+        Pageable pageable = PageRequest.of(0,5);
+        Page<Razorpay_payment> page = razorpayPaymentRepository.findAll(pageable);
+        System.out.println("Page"+ page);
+        List<Razorpay_payment> topFiveTransactions=page.getContent();
+
+         if(topFiveTransactions.isEmpty()){
+            throw new RuntimeException("Transactions not found");
+        }
+        else{
+            return topFiveTransactions;
+        }
+
     }
 
 }

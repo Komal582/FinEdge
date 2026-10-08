@@ -120,8 +120,7 @@ public class UserController {
            
             User user =(User)authentication.getPrincipal();
             Integer balanceAmount = balanceService.getBalanceById(user);
-            System.out.println("Balance"+balanceAmount); 
-           
+            
             Integer income = incomeService.getIncomeAmountByUser(user);
            
             Integer expense = expenseService.getExpenseAmountByUser(user);
@@ -134,6 +133,7 @@ public class UserController {
                   balanceAmount,
                   income,
                   expense,
+                  user.getEmail(),
                   userLatestTranscationList
                );
 

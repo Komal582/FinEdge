@@ -71,7 +71,7 @@ function Signup() {
 
             <div className="login-input-group">
               <label>Username</label>
-              <div className="input-wrapper">
+              <div className="login-input-wrapper">
               <FaUser></FaUser>
               <input
                 placeholder="Enter your name"
@@ -85,7 +85,7 @@ function Signup() {
 
               <div className="login-input-group">
               <label>Email</label>
-              <div className="input-wrapper">
+              <div className="login-input-wrapper">
                   <FaLock></FaLock>
               <input
                 placeholder="Enter your email"
@@ -98,7 +98,7 @@ function Signup() {
 
             <div className="login-input-group">
               <label>Password</label>
-              <div className="input-wrapper">
+              <div className="login-input-wrapper">
                   <FaLock></FaLock>
               <input
                 placeholder="Enter your password"
