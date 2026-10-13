@@ -11,7 +11,7 @@ import "../assets/css/Dashboard_basics.css";
 import { use } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { UserDataContext } from "../context/UserDataContext.jsx";
+
 import { useContext } from "react";
 
 function AdminDashborad() {
@@ -23,7 +23,7 @@ function AdminDashborad() {
   const [transactions, setTransactions] = useState(0);
   const [userList, setUserList] = useState(0);
   const [transactionsList, setTransactionsList] = useState(0);
-  const { userData, setUserData } = useContext(UserDataContext);
+
   let token = "Bearer " + localStorage.getItem("token");
   useEffect(() => {
     async function fetchDashboard() {
@@ -41,8 +41,8 @@ function AdminDashborad() {
           throw new Error("Request Failed");
         }
 
-        setUserData(data);
-
+      
+        localStorage.setItem("UserData", JSON.stringify(data));
         setExpenses(data.total_expense);
         setIncomes(data.total_income);
         setTransactions(data.total_transactions);

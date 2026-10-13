@@ -7,14 +7,13 @@ import InfoCard from "../components/InfoCard.jsx";
 import "../assets/css/table.css";
 import "../assets/css/Dashboard_basics.css";
 import { use } from "react";
-import { UserDataContext } from "../context/UserDataContext.jsx";
 import { useContext } from "react";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
-  const { userData, setUserData } = useContext(UserDataContext);
+  const[userData,setUserData]=useState({});
   const [loading, setLoading] = useState(true);
   const [expense, setExpenses] = useState(0);
   const [income, setIncomes] = useState(0);
@@ -34,12 +33,13 @@ function Dashboard() {
           },
         });
         const data = await response.json();
-        console.log("Data in Context ", data);
+      
         if (!response.ok) {
           throw new Error("Request Failed");
         }
 
         setUserData(data);
+         localStorage.setItem("UserData", JSON.stringify(data));
         setExpenses(data.expense);
         setIncomes(data.incomes);
         setTransactionsList(data.transcationList);

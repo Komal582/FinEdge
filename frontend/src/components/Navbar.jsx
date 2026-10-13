@@ -1,11 +1,13 @@
 import React from 'react'
 import {FaBell, FaUserCircle} from "react-icons/fa";
 import "../assets/css/Navbar.css";
-import UserDataContext from '../context/UserDataContext';
-import { useContext } from 'react';
+
 
 function Navbar() {
-  const {userData} = useContext(UserDataContext);
+  const savedUserData = localStorage.getItem("UserData");
+  const userData = savedUserData ? JSON.parse(savedUserData):null;
+
+ 
   return (
    
         <nav className="navbar">

@@ -8,14 +8,14 @@ import ExpenseCategoryContext from "../context/ExpenseCategoryContext";
 import { useContext } from "react";
 import "../assets/css/Report.css";
 import "../assets/css/table.css";
-import UserDataContext from '../context/UserDataContext';
+
 
 
 
 
 function Reports() {
-  const {userData} = useContext(UserDataContext);
-  console.log("User Data in Report",userData);
+ const savedUserData = localStorage.getItem("UserData");
+  const userData = savedUserData ? JSON.parse(savedUserData):null;
   const [error, setError] = useState("");
   const token = "Bearer " + localStorage.getItem("token");
   const [year, setYear] = useState(new Date().getFullYear());

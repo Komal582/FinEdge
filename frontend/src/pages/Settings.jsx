@@ -6,13 +6,12 @@ import "../assets/css/Settings.css";
 import "../assets/css/Dashboard_basics.css";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
-import UserDataContext from '../context/UserDataContext';
+
 
 function Settings() {
  
-  const {userData} = useContext(UserDataContext);
- 
+  const savedUserData = localStorage.getItem("UserData");
+  const userData = savedUserData ? JSON.parse(savedUserData):null;
   return (
     <>
       <Navbar />

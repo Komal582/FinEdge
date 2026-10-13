@@ -14,7 +14,6 @@ import Signup from "./pages/Signup";
 import ChangePassword from "./pages/changePassword";
 import { ExpenseCategoryProvider } from "./context/ExpenseCategoryContext";
 import { Outlet } from "react-router-dom";
-import { UserDataProvider } from "./context/UserDataContext";
 import AdminDashborad from "./pages/AdminDashborad";
 import { RoleProvider } from "./context/RoleContext";
 import AdminIncome from "./pages/AdminIncome";
@@ -28,7 +27,7 @@ function App() {
     <>
       <BrowserRouter>
        <RoleProvider>
-        <UserDataProvider>
+       
           <ExpenseCategoryProvider>
          
              
@@ -55,7 +54,7 @@ function App() {
               </Routes>
        
           </ExpenseCategoryProvider>
-        </UserDataProvider>
+    
         </RoleProvider> 
       </BrowserRouter>
     </>
